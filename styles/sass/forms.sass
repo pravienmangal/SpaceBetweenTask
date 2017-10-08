@@ -461,25 +461,25 @@
 	textarea::-webkit-input-placeholder
 		opacity: 1
 		color: $grey
-		font-size: 26px
+		font-size: 20px
 
 	input:-moz-placeholder,
 	textarea:-moz-placeholder
 		opacity: 1
 		color: $grey
-		font-size: 26px
+		font-size: 20px
 
 	input::-moz-placeholder,
 	textarea::-moz-placeholder
 		opacity: 1
 		color: $grey
-		font-size: 26px
+		font-size: 20px
 
 	input:-ms-input-placeholder,
 	textarea:-ms-input-placeholder
 		opacity: 1
 		color: $grey
-		font-size: 26px
+		font-size: 20px
 
 .placeholder,
 .placeholder.faux-file:after
@@ -515,8 +515,6 @@
 	.search-container-mob
 		margin-right: -15px
 
-+addMediaQuery("only screen and (min-width:" + $min-site-width-large + ")")
-
 	.search-container-mob
 		display: none !important
 
@@ -525,9 +523,10 @@
 		padding: 0 25px
 
 		.form-search
-			width: 55px
+			//width: 55px
 
 		.open-search
 			width: 100%
 			+transition(width, .8s)
+
 
