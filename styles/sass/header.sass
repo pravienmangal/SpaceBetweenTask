@@ -1,0 +1,500 @@
+/* HEADER */
+
+#nav-expand
+	position: absolute
+	position: fixed
+	z-index: -1
+	top: 0
+	left: -100px
+
+.header
+	display: block
+	clear: both
+	margin: 0
+	padding: 20px 0
+	//background: #535d64
+	background: #FFF
+	color: #6c5f59
+	+user-select
+
+	&:after
+		content: ''
+		display: block
+		clear: both
+		height: 0
+		max-height: 0
+		font-size: 0
+		line-height: 0
+		overflow: hidden
+		visibility: hidden
+
+.logo
+	display: block
+	width: 70px
+	height: 70px
+	margin: 0 auto
+	background: url('../images/EU-Logo-sm.png')
+	background-repeat: no-repeat
+	text-align: center
+	//text-decoration: none
+
+.top-navigation
+	display: none	
+
+.header-container
+	.nav-main-btn
+		position: relative
+		z-index: 500
+		float: left
+		margin: 7px 0 0 12px
+		width: 50px
+		height: 50px
+		font-size: 21px
+		line-height: 21px
+		text-align: center
+		color: #FFF
+		overflow: hidden
+		cursor: pointer
+		border-radius: 5px
+		//background: #000
+		color: #000
+		+inline-block(middle)
+		+user-select
+
+		&:before
+			content: '\f0c9'
+			display: block
+			margin: 0 0 10px 0
+			padding: 15px 0
+			color: $white
+			background: $black 
+			font-family: $font-awesome
+			font-weight: normal
+			font-size: 30px
+
+
+.nav-main
+	position: relative
+	z-index: 500
+	outline: none
+	text-align: right
+
+	ul
+		margin: 0
+		padding: 0
+		list-style: none
+
+	li
+		margin: 0
+		padding: 0
+
+	a
+		display: block
+		text-decoration: none
+		text-align: left
+		//font-weight: 600
+
+
++addMediaQuery("only screen and (max-width:" + ($min-site-width-large - 1px) + ")")
+	
+	body
+		overflow-x: hidden
+		//background: #000
+		background: $white
+
+	.wrap
+		left: 0
+		+transition(left)
+	
+	.header
+		position: fixed
+		z-index: 500
+		top: 0
+		left: 0
+		right: 0
+		width: 100% 
+		width: 100vw
+		max-width: 100%
+		box-shadow: 0 0 10px rgba(#000, 0.2)
+
+
+	.nav-main
+		position: fixed
+		//z-index: -1
+		top: 110px
+		bottom: 0
+		left: -260px
+		width: 260px
+		max-width: 100%
+		overflow: hidden
+		//-webkit-transition: z-index 0ms ease 0ms, bottom 0ms ease 300ms
+		//-moz-transition: z-index 0ms ease 0ms, bottom 0ms ease 300ms
+		//-ms-transition: z-index 0ms ease 0ms, bottom 0ms ease 300ms
+		//-o-transition: z-index 0ms ease 0ms, bottom 0ms ease 300ms
+		//transition: z-index 0ms ease 0ms, bottom 0ms ease 300ms
+		+transition(left)
+	
+		.container
+			position: relative
+			left: 0
+			margin: 0
+			padding: 0
+			width: 100%
+			height: 100%
+			white-space: nowrap
+			+space-remove
+			+transition(left)
+
+
+			> ul
+				display: inline-block
+				vertical-align: top
+				width: 100%
+				height: 100%
+				overflow: auto
+				-webkit-overflow-scrolling: touch
+	
+				> li > ul
+					margin-top: -10px
+
+	
+		ul
+			display: block
+			list-style: none
+			white-space: normal
+			+space-reset(1.4,1.2)
+
+			ul
+				padding: 0 0 3px 20px
+				+font-size(1.3)
+	
+				li
+					border: 0 none
+					margin: 10px 0 0 0
+	
+				a
+					padding: 3px 20px 3px 20px
+					font-weight: lighter
+	
+					&:before
+						content: '-'
+						float: left
+						margin: 0 0 0 -0.6em
+						width: 0.6em
+				
+		li
+			display: block
+			//border-bottom: 1px solid #333
+
+		a
+			display: block
+			padding: 12px 20px
+			//color: #FFF
+			color: $body-color
+			font-family: $font-primary
+			+transition(none)
+
+			&:hover,
+			&:focus,
+			&.on
+				color: $grey-light
+
+	
+	.nav-back
+		display: block
+		padding: 13px 20px
+		color: #AAA
+		font-weight: 600
+		cursor: pointer
+		border-bottom: 1px solid #AAA
+
+		&:hover
+			color: #FFF
+
+		&:before
+			content: '\f0d9'
+			display: inline-block
+			margin: 0 10px 0 0
+			font-family: $font-awesome
+			font-weight: normal
+
+
+	.nav-mask
+		visibility: hidden
+		position: absolute
+		z-index: 400
+		top: 0
+		left: 0
+		width: 100%
+		height: 100%
+		cursor: default
+		box-shadow: inset 0 0 0 rgba(0,0,0,0)
+		background: rgba(0,0,0,0)
+		+transition('visibility, box-shadow, background')
+
+
+	#nav-expand:checked
+	
+		+ .wrap
+			left: 260px
+
+		~ *
+
+			.nav-main
+				//z-index: 0
+				//bottom: 0
+				left: 0
+				//-webkit-transition: z-index 0ms ease 300ms, bottom 0ms ease 0ms
+				//-moz-transition: z-index 0ms ease 300ms, bottom 0ms ease 0ms
+				//-ms-transition: z-index 0ms ease 300ms, bottom 0ms ease 0ms
+				//-o-transition: z-index 0ms ease 300ms, bottom 0ms ease 0ms
+				//transition: z-index 0ms ease 300ms, bottom 0ms ease 0ms
+
+			.nav-mask
+				visibility: visible
+				box-shadow: inset 0 0 10px rgba(0,0,0,0.4)
+				background: rgba(0,0,0,0.5)
+	
+	
+	.js .nav-main
+	
+		li
+			display: table
+			width: 100%
+
+		a
+			display: table-cell
+			vertical-align: top
+	
+			+ ul
+				display: table-cell
+				vertical-align: top
+				margin: 0
+				padding: 10px 20px
+				width: 10px
+				color: #AAA
+				text-align: right
+				cursor: pointer
+	
+				&:hover
+					color: #FFF
+				
+				*
+					display: none
+	
+				&:before
+					content: '\f0c9'
+					display: block
+					font-family: $font-awesome
+					font-size: 21px
+					line-height: 1
+					font-weight: normal
+
+	
++addMediaQuery("only screen and (min-width:" + $min-site-width-medium + ")")
+
+	//.logo
+		//float: right
+		max-width: none
+		margin: 0
+		text-align: center
+
+	
++addMediaQuery("only screen and (min-width:" + $min-site-width-large + ")")
+
+	.header-container
+		.nav-main-btn
+			display: none
+
+	.logo
+		float: left
+		padding: 10px 0 0
+		width: 150px
+		max-width: none
+		height: 115px
+		background: url('../images/EU-Logo.png')
+		background-repeat: no-repeat
+
+	.search-container
+		display: block
+		width: 500px
+		float: right
+		margin:  0 15px 0 0
+	
+	.nav-container
+		float: right
+		width: 66%
+
+	.top-navigation
+		display: block
+		float: right
+
+		.container
+
+			> ul
+				text-align: justuify
+				-ms-text-justify: distribute-all-lines
+				text-justify: distribute-all-lines
+				font-size: 14px
+				//+space-remove
+
+				li
+					list-style: none
+					display: inline-block
+					margin: 0 10px 0 0 
+
+					&:last-child
+						margin: 0
+
+					a
+						text-decoration: none
+						color: #b3aeab
+	
+	//.donation-btn
+		//display: inline-block
+		background: $green
+		padding: 6px 15px !important
+		color: #FFF !important
+		float: right
+		margin-top: 5px !important
+		font-size: 16px
+
+	.nav-main
+		clear: both
+		//display: none
+		margin: 0
+		padding: 0
+
+		.container
+			> ul
+				//margin: 0 -20px !important
+				//text-align: justify
+				-ms-text-justify: distribute-all-lines
+				text-justify: distribute-all-lines
+				+space-remove
+
+				&:after
+					content: ""
+					display: block
+					+gt-ie8
+						display: inline-block
+						width: 100%
+					font-size: 0
+					line-height: 0
+					height: 0
+					overflow: hidden
+					visibility: hidden
+	
+				//> li:first-child
+					display: none
+
+		ul
+			display: inline-block
+
+			ul
+				display: none
+				position: absolute
+				padding: 31px 0 0
+				min-width: 230px
+				background: #fff
+				//background: rgba(#000, 0.8)
+	
+				ul
+					background: #fff
+					//background: rgba(#000, 0.85)
+					
+	
+					ul
+						background: #fff
+						//background: rgba(#000, 0.9)
+	
+				li
+					display: block
+	
+					&:hover
+						ul 
+							top: 0
+							left: 100%
+	
+					&:first-child
+						border-top: 5px solid $grey
+	
+				a
+					padding: 10px 20px
+					font-family: $font-body
+					color: $grey
+					//+font-size(1.8)
+	
+					//&:before
+						content: $chevron-right
+						font-family: $font-awesome
+						color: $green-copy
+						font-size: 18px
+						margin-right: 10px						
+						font-weight: lighter
+	
+					&:hover
+						//background: $grey-light
+						color: $grey-light
+	
+						&:before
+							color: $grey-light
+	
+				.on
+					//background: $grey-light
+	
+				
+		li
+			position: relative
+			text-align: left
+			font-family: $font-primary
+			//text-transform: uppercase
+			+inline-block
+			+space-reset(1.8, 1.4)
+
+			&:hover
+
+				> a
+					color: $grey-light
+					//opacity: .5
+					//background: #000
+
+				> ul
+					display: block
+	
+		a
+			padding: 30px 15px 0 15px
+			color: $body-color
+			font-family: $font-primary
+			//border-bottom: 2px solid transparent
+			+transition(color, $interval: .3s, $ease: ease, $delay: 0s)
+
+			&:hover,
+			&:focus
+				color: $grey-light
+				//acity: .5
+				//border-bottom: 2px solid $green
+				//margin: 0 0 -2px 0
+
+			&.on
+				color: $grey-light
+		
+				&:hover
+					color: $grey-light
+		//.donation-btn
+			&:hover,
+			&:focus,
+			&.on
+				border-bottom: none
+	
+	
+				
+	.nav-main-sub
+		display: none !important
+
+
+
+@media print
+	
+	.header
+		display: none

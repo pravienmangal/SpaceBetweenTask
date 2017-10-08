@@ -1,0 +1,533 @@
+// FORM STYLES
+
+.form-label
+	position: relative
+	display: block
+	margin: 0 0 5px 0
+	font-family: $font-body
+	font-weight: 700
+	+font-size($txt-h4)
+
+.form-element,
+.form-search,
+.form-file
+	position: relative
+	z-index: 1
+	display: block
+	margin: 0 0 15px 0
+	padding: 7px 10px
+	//width: 312px
+	//max-width: 100%
+	border: 1px solid $grey
+	//border-radius: 6px
+	background: #FFF
+	cursor: text
+	text-align: left
+	+box-sizing
+
+.form-short
+	max-width: 190px
+
+.form-element-focus
+	z-index: 100
+
+.form-element input,
+.form-element textarea,
+.form-element select,
+.faux-select-text,
+.faux-select-list li,
+.form-search input,
+.form-file:after
+	position: relative
+	z-index: 1
+	display: block
+	margin: 0
+	padding: 0
+	border: 0 none
+	border-radius: 0
+	outline: none
+	width: 100%
+	min-width: 100%
+	max-width: 100%
+	height: 20px
+	vertical-align: middle
+	list-style: none
+	font-family: $font-body
+	font-weight: normal
+	text-indent: 0
+	color: $body-color
+	background: transparent
+	box-shadow: none
+	-webkit-appearance: none
+	font-size: 13px
+	line-height: 20px
+
++gt-ie8
+	input[type=number]::-webkit-inner-spin-button, 
+	input[type=number]::-webkit-outer-spin-button 
+		-webkit-appearance: none
+		margin: 0
+
+	input[type=number]
+		-moz-appearance: textfield
+
+.form-element textarea
+	overflow: auto
+	min-height: 120px
+	height: 120px
+
+.form-element select[multiple]
+	overflow: auto
+	min-height: 120px
+	height: 120px
+
++gt-ie8
+	.iOS
+		.form-element input
+			margin-left: -1px
+			width: -webkit-calc(100% + 1px)
+			min-width: -webkit-calc(100% + 1px)
+			max-width: -webkit-calc(100% + 1px)
+
+		.form-element textarea
+			margin-left: -3px
+			width: -webkit-calc(100% + 3px)
+			min-width: -webkit-calc(100% + 3px)
+			max-width: -webkit-calc(100% + 3px)
+
+		.form-element select[multiple]
+			min-height: 0
+			height: auto
+
+.faux-select
+	cursor: pointer
+
+	select
+		position: absolute
+		top: 0
+		left: 0
+		visibility: hidden
+
+
+.faux-select-mobile select
+	display: block
+	visibility: visible
+	z-index: 100
+	top: 0
+	bottom: 0
+	left: 0
+	right: 0
+	width: auto
+
+.faux-select-btn
+	position: relative
+	float: right
+	display: inline
+	margin: -7px -10px -7px 9px
+	padding: 7px 9px
+	width: 16px
+	height: 20px
+	line-height: 20px
+	border-left: 1px solid $grey
+
+	&:before
+		content: '\f0d7' 
+		display: block
+		width: 100%
+		font-family: 'FontAwesome'
+		font-size: 18px
+		line-height: 20px
+		text-align: center
+		color: $grey
+		display: block
+
+
+.faux-select-text,
+.faux-select-text:focus
+	display: block
+	margin: 0
+	width: auto
+	min-width: 0
+	max-width: none
+	overflow: hidden
+	white-space: nowrap
+	outline: 0 none
+	cursor: pointer
+	+user-select
+
+	&::selection
+		background: #FFF
+
+	&::-moz-selection
+		background: #FFF
+
+.faux-select-list
+	display: none
+	position: absolute
+	top: 100%
+	left: -1px
+	margin: 1px 0 0 0
+	padding: 0
+	list-style: none
+	border: 1px solid #999
+	border-top: 0 none
+	//border-radius: 0 0 6px 6px
+	background: #FFF
+	overflow: auto
+	width: 100%
+	max-height: 240px
+
+	li
+		margin: 0
+		padding: 7px 10px
+		width: auto
+		height: auto
+		min-width: 0
+		max-width: none
+		color: $grey
+
+		&:first-child
+			border-top: 0 none
+
+		&:hover
+			color: $grey
+			background: $grey-light
+
+		&.selected
+			color: #FFF
+			background: $grey
+
+
+.faux-select-focus
+	z-index: 100
+	//border-radius: 20px 20px 0 0 !important
+
+	.faux-select-list
+		display: block
+
+	.faux-select-btn
+		//border-top-color: $grey
+
+	//&:not(.faux-select-mobile)
+		//z-index: 100
+		//border-radius: 5px 5px 0 0
+
+
+.form-hidden
+	display: none
+
+.form-search
+	padding-right: 35px
+	overflow: hidden
+
+	.btn
+		position: absolute
+		top: 0
+		right: 0
+		bottom: 0
+		margin: 0
+		padding: 0
+		width: 35px
+		border: 0 none
+		border-left: 1px solid $grey
+		border-radius: 0
+		text-align: left
+		color: $grey
+		white-space: nowrap
+		overflow: hidden
+		background: none
+
+		&:before
+			content: '\f002'
+			display: inline-block
+			width: 100%
+			font-family: 'FontAwesome'
+			font-weight: normal
+			font-size: 14px
+			line-height: 20px
+			text-align: center
+
+		&:hover,
+		&:focus
+			color: $grey
+			border-color: $grey
+			background: none
+
+.form-file
+	position: relative
+	overflow: hidden
+	cursor: pointer
+	padding: 0
+
+	&:after
+		content: '\00a0'
+		margin: 0
+		padding: 5px 8px
+		white-space: nowrap
+		overflow: hidden
+		width: auto
+		min-width: 0
+		max-width: none
+		max-height: 100%
+		color: $grey
+
+	input
+		position: absolute
+		z-index: 10
+		top: 0
+		left: 0
+		width: auto
+		min-width: 0
+		max-width: none
+
+.faux-file
+	
+	&:after
+		content: attr(data-val)
+	
+	&:before
+		content: 'Browse'
+		float: right
+		display: inline
+		margin: 0 0 0 8px
+		padding: 5px 8px
+		height: 20px
+		line-height: 20px
+		color: $grey
+		border-left: 1px solid $grey
+
+	input
+		top: auto
+		bottom: 100%
+		cursor: pointer
+		+opacity(0)
+
+	.btn
+		float: right
+		display: inline
+		margin: 0
+
+
+.form-checkbox,
+.form-radio
+	position: relative
+	display: block
+	margin: 0 0 20px 0
+	padding: 0 0 0 26px
+	overflow: hidden
+	font-family: $font-body
+	font-weight: normal
+	line-height: 16px
+	text-align: left
+	+user-select
+
+.form-checkbox + .form-checkbox
+	margin-top: -5px
+
+.form-radio + .form-radio
+	margin-top: -5px
+
+.form-checkbox input,
+.form-radio input
+	float: left
+	display: inline
+	margin: 0 0 0 -26px
+	padding: 0
+	cursor: pointer
+	outline: none
+
+.faux-checkbox,
+.faux-radio
+	position: relative
+	float: left
+	display: inline
+	overflow: hidden
+	margin: 0 0 0 -26px
+	padding: 0
+	width: 14px
+	height: 14px
+	border: 1px solid $grey
+	background: #FFF
+	cursor: pointer
+
+	.faux-inner
+		overflow: hidden
+		float: left
+		display: inline
+		text-align: center
+	
+	input
+		position: absolute
+		z-index: 10
+		top: 0
+		right: 0
+		margin: 0
+		outline: none
+
+.faux-checkbox .faux-inner
+	width: 14px
+	height: 14px
+	font-family: 'FontAwesome'
+	font-weight: normal
+	font-size: 12px
+	line-height: 14px
+	color: #FFF
+
+.faux-radio
+	border-radius: 8px
+	
+	.faux-inner
+		margin: 2px
+		width: 10px
+		height: 10px
+		border-radius: 5px
+		background: $grey-light
+
+.form-checkbox .checked
+	color: $blue
+
+.form-checkbox :checked + .faux-inner
+	color: $blue
+
+.form-radio .checked
+	background: $blue
+
+.form-radio :checked + .faux-inner
+	background: $blue
+
+.error
+	color: $red
+	
+.form-error,
+	display: none
+	margin: -7px 0 15px 0
+	color: $red
+	font-weight: 500
+	line-height: 1.2
+
+.error-border
+	border-color: $red
+
+	.faux-select-list,
+	.faux-radio,
+	.faux-checkbox
+		border-color: $red
+
+.error-on
+	.form-element,
+	.faux-select-list,
+	.faux-radio,
+	.faux-checkbox
+		border-color: $red
+
+	.form-error
+		display: block
+
+.btn
+	position: relative
+	margin: 0 0 4px 0
+	padding: 7px 15px
+	border: 1px solid $blue
+	border-radius: 0
+	overflow: visible
+	font-family: $font-body
+	font-weight: 600
+	font-size: 14px
+	line-height: 20px
+	word-spacing: normal
+	text-decoration: none
+	text-align: left
+	text-shadow: none
+	text-transform: none
+	color: #FFF
+	cursor: pointer
+	background: $blue
+	+user-select
+	+inline-block(middle)
+	+transition('background, color')
+
+	&:hover,
+	&:focus
+		opacity: 1
+		outline: 0 none
+		color: #FFF
+		text-decoration: none
+		border-color: $grey-dark
+		background: $grey-dark
+
+
++gt-ie8
+	input::-webkit-input-placeholder,
+	textarea::-webkit-input-placeholder
+		opacity: 1
+		color: $grey
+		font-size: 26px
+
+	input:-moz-placeholder,
+	textarea:-moz-placeholder
+		opacity: 1
+		color: $grey
+		font-size: 26px
+
+	input::-moz-placeholder,
+	textarea::-moz-placeholder
+		opacity: 1
+		color: $grey
+		font-size: 26px
+
+	input:-ms-input-placeholder,
+	textarea:-ms-input-placeholder
+		opacity: 1
+		color: $grey
+		font-size: 26px
+
+.placeholder,
+.placeholder.faux-file:after
+	color: $grey-light
+
+.disabled
+	+opacity(0.5)
+
+
+.js .ppc-form
+	display: none
+	margin: 0
+
+
+.js .form-other
+	display: none
+
+.form-field
+	//margin: 10px 0 0 
+
+.footer
+	.form-element
+		max-width: 240px
+		padding: 10px
+
+
+
++addMediaQuery("only screen and (min-width:" + $min-site-width-medium + ")")
+
+	.form-field
+		margin: 30px 0 0
+
+	.search-container-mob
+		margin-right: -15px
+
++addMediaQuery("only screen and (min-width:" + $min-site-width-large + ")")
+
+	.search-container-mob
+		display: none !important
+
+	.search-container
+		display: block
+		padding: 0 25px
+
+		.form-search
+			width: 55px
+
+		.open-search
+			width: 100%
+			+transition(width, .8s)
+

@@ -1,0 +1,168 @@
+/* FOOTER */
+
+.footer
+	position: relative
+	display: block
+	clear: both
+	margin: 0
+	color: $body-color
+	+bg-size
+	//padding: 0 8px
+	//background: $grey-light-mid
+	//background-repeat: no-repeat
+	//background-position: 50% 50%
+
+	&:after,
+	&:before
+		content: ''
+		display: block
+		clear: both
+		height: 0
+		max-height: 0
+		font-size: 0
+		line-height: 0
+		overflow: hidden
+		visibility: hidden
+
+.footer-container
+	padding: 15px $horizontal-padding-small
+
+.address-content
+	color: $grey-light-mid
+	font-size: 16px
+	margin: 0 0 15px 0
+
+.address
+	margin: 0 0 25px 0
+
+.footer-bottom
+	margin-top: 15px
+
+.footer-links
+	text-align: left
+	font-size: 12px
+	padding: 0
+
+	ul
+		//padding: 0
+	
+		li
+			list-style: none
+			display: inline-block
+			margin: 0 0 0 15px
+
+			&:first-child,
+			&:last-child
+				margin: 0
+
+	a
+		color: $body-color
+
+.social
+	margin: 10px 0 0
+	display: block
+
+	ul
+		float: left
+		margin: 0 0 15px 0
+		height: 50px
+		padding: 0
+
+		li
+			list-style: none
+			float: left
+			//margin-right: 15px
+
+			&:last-child
+				a
+					margin-right: 30px
+
+		a
+			text-decoration: none
+			position: relative
+			margin-right: 50px
+		
+			&:before
+				position: absolute
+				text-align: right
+				top: 0
+				left: 0	
+				height: 30px
+				width: 30px
+				font-size: 30px
+				line-height: 30px
+				color: $grey-light-mid
+				font-family: $font-awesome
+				+transition(all, .8s)
+	
+	
+		.twitter-link
+			&:before
+				content: $twitter-icon
+				
+			&:hover,
+			&:focus
+				&:before
+					color: $twitter-colour
+	
+		.facebook-link
+			&:before
+				content: $facebook-icon
+	
+			&:hover,
+			&:focus
+				&:before
+					color: $facebook-colour
+	
+	
+		.youtube-link
+			&:before
+				content: $youtube-icon
+		
+			&:hover,
+			&:focus
+				&:before
+					color: $youtube-colour
+
+
+
++addMediaQuery("only screen and (min-width:" + $min-site-width-medium + ")")
+
+
+	.footer-container
+		padding: 25px $horizontal-padding-large
+
+	.social
+		ul
+			padding: 0 0 0 15px
+			float: right
+	
+	.footer-bottom
+		margin-top: 25px
+
+	.footer-links
+		text-align: left
+		padding-left: 20px
+
+		ul
+			li
+				margin: 0 15px 0 0
+
+
+
++addMediaQuery("only screen and (min-width:" + $min-site-width-large + ")")
+
+	.footer-links
+		text-align: right
+
+		ul
+			li
+				margin: 0 15px 0 0
+
+
+
+@media print
+	
+	.footer
+		display: none
+	

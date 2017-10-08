@@ -1,0 +1,212 @@
+/**** LAYOUTS ****/
+
+html
+	font-size: 10px
+	height: 100%
+	//overflow-y: scroll
+
+body
+	position: relative
+	z-index: 0
+	margin: 0
+	width: 100%
+	height: 100%
+	+text-size-adjust(none)
+
+img
+	width: auto
+	height: auto
+	max-width: 100%
+	vertical-align: bottom
+	+box-sizing
+
+.wrap
+	position: relative
+	display: table
+	table-layout: fixed
+	margin: 0 auto
+	padding: 0
+	width: 100%
+	max-width: $max-site-width-small
+	min-width: $min-site-width-small
+	height: 100%
+	+lt-ie9
+		*height: auto
+	min-height: 100%
+	//*height: auto
+	//*min-height: 0
+	//background: #d9edf0
+	box-shadow: 0 0 10px rgba(#000, 0.2)
+		
+.container
+	display: block
+	list-style: none
+	margin: 0 auto
+	padding: 0 $horizontal-padding-small
+	//max-width: $content-width-small
+
+.grid
+	display: block
+	margin: 0 0 0 (-$gutter-small)
+	padding: 0
+	list-style: none
+	font-family: 'reset'
+	font-size-adjust: 0
+	font-size: 0
+	line-height: 0
+	text-rendering: optimizespeed
+	+user-select
+	+lt-ie9
+		zoom: 1
+
+	&:after
+		content: ''
+		display: block
+		height: 0
+		overflow: hidden
+		visibility: hidden
+
+	& > *
+		margin: 0
+		padding: 0
+		width: $width-1
+		max-width: 100%
+		border: 0
+		border-left: $gutter-small solid transparent
+		font-family: $font-primary
+		font-size-adjust: none
+		line-height: $line-height	
+		text-rendering: auto
+		word-wrap: break-word
+		-webkit-background-clip: padding-box
+		-moz-background-clip: padding
+		background-clip: padding-box
+		+inline-block(top)
+		+box-sizing
+		+user-select(text)
+		+font-size($txt-body, $line-height)
+
+.justify
+	text-align: justify
+	-ms-text-justify: distribute-all-lines
+	text-justify: distribute-all-lines
+
+	+gt-ie8
+		&:after
+			display: inline-block
+			vertical-align: bottom
+			width: 100%
+	
+	& > *
+		text-align: left
+		-ms-text-justify: auto
+		text-justify: auto
+	
+
+.reverse
+	direction: rtl
+
+	> *
+		direction: ltr
+
+.flex
+	+gt-ie8
+		display: -webkit-box
+		display: -moz-box
+		display: -ms-flexbox
+		display: -webkit-flex
+		display: flex
+		-webkit-flex-wrap: wrap
+		-ms-flex-wrap: wrap
+		flex-wrap: wrap
+
+		> *
+			display: -webkit-box
+			display: -moz-box
+			display: -ms-flexbox
+			display: -webkit-flex
+			display: flex
+			//-webkit-flex-shrink: 0
+			//-ms-flex-shrink: 0
+			//flex-shrink: 0
+
+			> *
+				-webkit-flex: 1 1 auto
+				-ms-flex: 1 1 auto
+				flex: 1 1 auto
+			
+
+[class*=push-],
+[class*=pull-]
+	position: relative
+
++columns('', $names, $widths)
+
+
+head
+	font-family: false
+
+@media only screen
+	head
+		font-family: small
+
+
++addMediaQuery('only screen and (min-width:' + $min-site-width-medium + ')')
+
+	head
+		font-family: medium
+
+	.wrap
+		max-width: $max-site-width-medium
+
+	.container
+		max-width: $content-width-medium
+		padding: 0 $horizontal-padding-medium
+
+	.grid
+		margin-left: (-$gutter-medium)
+
+		> *
+			border-left-width: $gutter-medium
+
+	+columns(medium, $names, $widths)
+
+
++addMediaQuery('only screen and (min-width:' + $min-site-width-large + ')')
+
+	head
+		font-family: large
+
+	.wrap
+		max-width: $max-site-width-large
+		+lt-ie9
+			min-width: $content-width-large + ($horizontal-padding-large * 2)
+
+	.container
+		max-width: $content-width-large
+		padding: 0 $horizontal-padding-large
+
+	.grid
+		margin-left: (-$gutter-large)
+
+		> *
+			border-left-width: $gutter-large
+		
+	+columns(large, $names, $widths)
+
+	+lt-ie9
+		.grid
+			> *
+				//*width: expression((e=this.className.split('span-'), e=e[e.length-1]) && (e=e.split(' ')[0].split('-')) && e[0] ? (this.parentNode.offsetWidth / parseInt(e[1] || 1) * parseInt(e[0]) - (parseInt(this.currentStyle['paddingLeft']) + parseInt(this.currentStyle['paddingRight']) + parseInt(this.currentStyle['borderLeftWidth']) + parseInt(this.currentStyle['borderRightWidth'])) + 'px') : '')
+				//*box-sizing-width: expression(cs=this.currentStyle,rs=this.runtimeStyle,rs.oldWidth=rs.oldWidth||cs.width,excess=parseInt(cs.paddingLeft)+parseInt(cs.paddingRight)+parseInt(cs.borderLeftWidth)+parseInt(cs.borderRightWidth),num=parseFloat(rs.oldWidth),num?rs.width=(rs.oldWidth.split('%').length==2?this.parentNode.offsetWidth/100*num:num)-excess+'px':'', rs.maxWidth=this.parentNode.offsetWidth-excess+'px')
+				*box-sizing-width: expression(cs=this.currentStyle,rs=this.runtimeStyle,rs.oldWidth=rs.oldWidth||cs.width,excess=parseInt(cs.paddingLeft)+parseInt(cs.paddingRight)+parseInt(cs.borderLeftWidth)+parseInt(cs.borderRightWidth),pw=this.parentNode.offsetWidth,num=parseFloat(rs.oldWidth),num&&pw?rs.width=(rs.oldWidth.split('%').length==2?pw/100*num:num)-excess+'px':'',pw?rs.maxWidth=pw-excess+'px':'')
+
+
+@media print
+	
+	.wrap
+		display: block
+
+	@font-face
+		font-family: 'reset'
+		src: url('') format('truetype')

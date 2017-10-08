@@ -1,0 +1,438 @@
+//Mixins
+
+@mixin font-size($size: $txt-body, $line:'')
+	font-size: ($size * 10) + px
+	+gt-ie8
+		font-size: $size + rem
+
+	@if $line != ''
+		line-height: $line
+
+
+@mixin inline-block($valign: top)
+	vertical-align: $valign
+	display: inline-block
+
+
+@mixin box-sizing($val: border-box)
+	+gt-ie8
+		-webkit-box-sizing: $val
+		-moz-box-sizing: $val
+	box-sizing: $val
+
+
+@mixin img-replace
+	display: block
+	overflow: hidden
+	text-indent: 200%
+	white-space: nowrap
+	word-wrap: normal
+
+
+@mixin opacity($val)
+	+gt-ie8
+		-moz-opacity: $val
+		-khtml-opacity: $val
+		opacity: $val
+	+lt-ie9
+		-ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=" + ($val * 100) + ")"
+		filter: alpha(opacity=($val * 100))
+
+
+@mixin text-size-adjust($val: auto)
+	+gt-ie8
+		-webkit-text-size-adjust: $val
+		-moz-text-size-adjust: $val
+		-ms-text-size-adjust: $val
+		text-size-adjust: $val
+
+
+@mixin user-select($val: none)
+	+gt-ie8
+		-webkit-touch-callout: $val
+		-webkit-user-select: $val
+		-khtml-user-select: $val
+		-moz-user-select: $val
+		-ms-user-select: $val
+		user-select: $val
+
+
+@mixin transition($property: all, $interval: .3s, $ease: ease, $delay: 0s)
+	+gt-ie8
+		$temp: $property
+		@if str-index($property, ' ')
+			$temp: all
+
+		-webkit-transition: $temp $interval $ease $delay
+		-moz-transition: $temp $interval $ease $delay
+		-ms-transition: $temp $interval $ease $delay
+		-o-transition: $temp $interval $ease $delay
+		transition: $temp $interval $ease $delay
+
+		@if str-index($property, ' ')
+			-webkit-transition-property: unquote($property)
+			-moz-transition-property: unquote($property)
+			-ms-transition-property: unquote($property)
+			-o-transition-property: unquote($property)
+			transition-property: unquote($property)
+
+@mixin transition-delay($val)
+	-webkit-transition-delay: $val
+	-moz-transition-delay: $val
+	-ms-transition-delay: $val
+	transition-delay: $val
+
+@mixin transition-duration($val)
+	-webkit-transition-duration: $val
+	-moz-transition-duration: $val
+	-ms-transition-duration: $val
+	transition-duration: $val
+
+@mixin transform($val)
+	-webkit-transform: $val
+	-moz-transform: $val
+	-ms-transform: $val
+	-o-transform: $val
+	transform: $val
+
+@mixin fade-in-left-start
+	opacity: 0
+	visibility: hidden
+	+transform(translate3d(200px, 0, 0))
+
+@mixin fade-in-left-end
+	opacity: 1
+	visibility: visible
+	+transform(translate3d(0, 0, 0))
+
+//@mixin bg-size($property: cover)
+	+gt-ie8
+		-webkit-background-size: unquote($property)
+		-moz-background-size: unquote($property)
+		-o-background-size: unquote($property)
+		background-size: unquote($property)
+
+@mixin bg-size($property: cover)
+	+gt-ie8
+		-webkit-background-size: $property
+		-moz-background-size: $property
+		-o-background-size: $property
+		background-size: $property
+	
+
+@mixin border-radius($radius)
+	+gt-ie8
+		-webkit-border-radius: $radius
+		-moz-border-radius: $radius
+		-ms-border-radius: $radius
+		-o-border-radius: $radius
+		border-radius: $radius
+
+
+@mixin force-acceleration
+	+gt-ie8
+		-webkit-transform: translateZ(0)
+		-moz-transform: translateZ(0)
+		-ms-transform: translateZ(0)
+		-o-transform: translateZ(0)
+		transform: translateZ(0)
+		-webkit-backface-visibility: hidden
+		-moz-backface-visibility: hidden
+
+@mixin rotate-scale($deg: 0, $scaleX: 1, $scaleY: $scaleX)
+	+gt-ie8
+		-webkit-transform: rotate($deg + deg) matrix($scaleX, 0, 0, $scaleY, 0, 0) translateZ(0)
+		-moz-transform: rotate($deg + deg) matrix($scaleX, 0, 0, $scaleY, 0, 0) translateZ(0)
+		-ms-transform: rotate($deg + deg) matrix($scaleX, 0, 0, $scaleY, 0, 0)
+		-o-transform: rotate($deg + deg) matrix($scaleX, 0, 0, $scaleY, 0, 0) translateZ(0)
+		transform: rotate($deg + deg) matrix($scaleX, 0, 0, $scaleY, 0, 0) translateZ(0)
+
+@mixin rotate($deg: 0)
+	+gt-ie8
+		-webkit-transform: rotate($deg + deg)
+		-moz-transform: rotate($deg + deg)
+		-ms-transform: rotate($deg + deg)
+		-o-transform: rotate($deg + deg)
+		transform: rotate($deg + deg)
+
+@mixin scale($scaleX: 1, $scaleY: $scaleX)
+	+gt-ie8
+		-webkit-transform: matrix($scaleX, 0, 0, $scaleY, 0, 0) translateZ(0)
+		-moz-transform: matrix($scaleX, 0, 0, $scaleY, 0, 0) translateZ(0)
+		-ms-transform: matrix($scaleX, 0, 0, $scaleY, 0, 0)
+		-o-transform: matrix($scaleX, 0, 0, $scaleY, 0, 0) translateZ(0)
+		transform: matrix($scaleX, 0, 0, $scaleY, 0, 0) translateZ(0)
+		-webkit-backface-visibility: hidden
+
+
+// BORDER ARROWS
+
+@mixin arrow-up($v1, $v2: $v1, $v3: $v1, $color: null)
+	width: 0
+	height: 0
+	overflow: hidden
+	border-top: none
+	border-bottom: $v1 solid $color
+	border-left: $v2 solid transparent
+	border-right: $v3 solid transparent
+
+@mixin arrow-down($v1, $v2: $v1, $v3: $v1, $color: null)
+	width: 0
+	height: 0
+	overflow: hidden
+	border-bottom: none
+	border-top: $v1 solid $color
+	border-left: $v2 solid transparent
+	border-right: $v3 solid transparent
+
+@mixin arrow-right($v1, $v2: $v1, $v3: $v1, $color: null)
+	width: 0
+	height: 0
+	overflow: hidden
+	border-right: none
+	border-left: $v1 solid $color
+	border-top: $v2 solid transparent
+	border-bottom: $v3 solid transparent
+
+@mixin arrow-left($v1, $v2: $v1, $v3: $v1, $color: null)
+	width: 0
+	height: 0
+	overflow: hidden
+	border-left: none
+	border-right: $v1 solid $color
+	border-top: $v2 solid transparent
+	border-bottom: $v3 solid transparent
+
+
+// SPACE
+
+@mixin space-remove
+	font:
+		family: "reset"
+		size: 0
+	line-height: 0
+	+gt-ie8
+		text-rendering: optimizespeed
+
+@mixin space-reset($size: $txt-body, $line: $line-height)
+	+gt-ie8
+		text-rendering: auto
+	font-family: $font-body
+	+font-size($size, $line)
+
+
+// SVG
+// coordinates expect 100x100
+@mixin svg-shape($color: $black, $coordinates: "100.5,100 0,100 0,-0.5")
+	+gt-ie8
+		$color: inspect($color)
+		@if str-index($color, '#')
+			$color: "%23" + str-slice($color, 2)
+		background-image: url("data:image/svg+xml,%3Csvg%20version%3D%221.1%22%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20xmlns%3Axlink%3D%22http%3A//www.w3.org/1999/xlink%22%20x%3D%220px%22%20y%3D%220px%22%20viewBox%3D%220%200%20100%20100%22%20enable-background%3D%22new%200%200%20100%20100%22%20xml%3Aspace%3D%22preserve%22%20preserveAspectRatio%3D%22none%22%3E%3Cpolygon%20fill%3D%22" + $color + "%22%20points%3D%22" + unquote($coordinates) + "%22/%3E%3C/svg%3E")
+
+
+@mixin svg-gradient($color: $black, $coordinates: "100.5,100 0,100 0,-0.5")
+	$color: inspect($color)
+	@if str-index($color, '#')
+		$color: "%23" + str-slice($color, 2)
+	background-image: url("data:image/svg+xml,%3Csvg%20version%3D%221.1%22%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20xmlns%3Axlink%3D%22http%3A//www.w3.org/1999/xlink%22%20x%3D%220px%22%20y%3D%220px%22%20viewBox%3D%220%200%20100%20100%22%20enable-background%3D%22new%200%200%20100%20100%22%20xml%3Aspace%3D%22preserve%22%20preserveAspectRatio%3D%22none%22%3E%3Cstyle%20type%3D%22text/css%22%3E.gradient%7Bfill%3Aurl%28%23SVGGRADIENT%29%3B%7D%3C/style%3E%3ClinearGradient%20id%3D%22SVGGRADIENT%22%20gradientUnits%3D%22userSpaceOnUse%22%20x1%3D%229.094947e-013%22%20y1%3D%2250%22%20x2%3D%22100%22%20y2%3D%2250%22%3E%3Cstop%20offset%3D%220%22%20style%3D%22stop-color%3A%23FFFFFF%22/%3E%3Cstop%20offset%3D%221%22%20style%3D%22stop-color%3A%23000000%22/%3E%3C/linearGradient%3E%3Crect%20x%3D%220%22%20class%3D%22gradient%22%20width%3D%22100%22%20height%3D%22100%22/%3E%3C/svg%3E")
+
+// GRADIENTS
+
+@mixin gradient-horizontal($start-color: #555, $end-color: #333, $start-percent: 0%, $end-percent: 100%)
+	background: -moz-linear-gradient(left, $start-color $start-percent, $end-color $end-percent)
+	background: -webkit-gradient(linear, left top, left bottom, color-stop($start-percent,$start-color), color-stop($end-percent,$end-color))
+	background-image: -webkit-linear-gradient(left, $start-color $start-percent, $end-color $end-percent)
+	background-image: -o-linear-gradient(left, $start-color $start-percent, $end-color $end-percent)
+	background-image: linear-gradient(to right, $start-color $start-percent, $end-color $end-percent)
+	background-image: -ms-linear-gradient(left, $start-color $start-percent, $end-color $end-percent)
+	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#{ie-hex-str($start-color)}', endColorstr='#{ie-hex-str($end-color)}', GradientType=1)
+
+@mixin gradient-vertical($start-color: #555, $end-color: #333, $start-percent: 0%, $end-percent: 100%)
+	background: -moz-linear-gradient(top, $start-color $start-percent, $end-color $end-percent)
+	background: -webkit-gradient(linear, left top, right top, color-stop($start-percent,$start-color), color-stop($end-percent,$end-color))
+	background-image: -webkit-linear-gradient(top, $start-color $start-percent, $end-color $end-percent)
+	background-image: -o-linear-gradient(top, $start-color $start-percent, $end-color $end-percent)
+	background-image: linear-gradient(to bottom, $start-color $start-percent, $end-color $end-percent)
+	background-image: -ms-linear-gradient(top, $start-color $start-percent, $end-color $end-percent)
+	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#{ie-hex-str($start-color)}', endColorstr='#{ie-hex-str($end-color)}', GradientType=0)
+
+@mixin gradient-vertical-top($start-color: #555, $end-color: #333, $start-percent: 0%, $end-percent: 100%)
+	background: -moz-linear-gradient(top, $start-color $start-percent, $end-color $end-percent)
+	background: -webkit-gradient(linear, left top, right top, color-stop($start-percent,$start-color), color-stop($end-percent,$end-color))
+	background-image: -webkit-linear-gradient(top, $start-color $start-percent, $end-color $end-percent)
+	background-image: -o-linear-gradient(top, $start-color $start-percent, $end-color $end-percent)
+	background-image: linear-gradient(to top, $start-color $start-percent, $end-color $end-percent)
+	background-image: -ms-linear-gradient(top, $start-color $start-percent, $end-color $end-percent)
+	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#{ie-hex-str($start-color)}', endColorstr='#{ie-hex-str($end-color)}', GradientType=0)
+
+
+
+// POSITIONS
+
+@mixin position-top-left($left:0, $top:0, $position: absolute)
+	left: $left
+	position: $position
+	top: $top
+
+@mixin position-top-right($right:0, $top:0, $position: absolute)
+	position: $position
+	right: $right
+	top: $top
+
+@mixin position-bottom-left($left:0, $bottom:0, $position: absolute)
+	bottom: $bottom
+	left: $left
+	position: $position
+
+@mixin position-bottom-right($right:0, $bottom:0, $position: absolute)
+	bottom: $bottom
+	position: $position
+	right: $right
+
+
+// GRID
+
+@mixin grid($align: default, $gutter: default)
+
+	@extend .grid
+
+	@if $gutter != default
+		margin-left: (-$gutter)
+
+		& > *
+			padding: 0 0 0 $gutter
+
+	@if $align == justify
+		@extend .justify
+
+	@else if $align != default
+		text-align: $align
+
+		
+@mixin columns($prefix, $names, $widths)
+	
+	$prefix: if($prefix == '', '', $prefix + '-')
+
+	@for $i from 1 through length($names)
+
+		$name: nth($names, $i)
+		$width: nth($widths, $i)
+
+		.#{$prefix}span-#{if($name == '0', auto, $name)}
+			width: if($width == 0, auto, $width)
+
+		.#{$prefix}offset-#{$name}
+			margin-left: $width
+
+		.#{$prefix}inset-#{$name}
+			margin-right: $width
+
+		.#{$prefix}push-#{$name}
+			left: $width
+
+		.#{$prefix}pull-#{$name}
+			left: -$width
+
+
+@mixin icon($icon, $size: inherit)
+	
+	content: $icon
+	display: inline-block
+	font-family: $font-awesome
+	font-weight: normal
+	font-size: $size
+	line-height: 1
+	text-rendering: auto
+	text-decoration: none
+	-webkit-font-smoothing: antialiased
+	-moz-osx-font-smoothing: grayscale
+
+
+// MEDIA QUERIES
+
+$flatten: false !default
+@mixin addMediaQuery($query)
+	@if $flatten == true and str-index($query, 'max') == null
+		@content
+
+	@else
+		@media #{$query}
+			@content
+
+@mixin gt-ie8
+	@if $flatten == false
+		@content
+
+@mixin lt-ie9
+	@if $flatten == true
+		@content
+
+
+// RGBA
+
+@mixin rgba($color, $alpha)
+	$rgba: rgba($color, $alpha)
+	$ie-hex-str: ie-hex-str($rgba)
+	
+	+gt-ie8
+		background-color: $color
+		background-color: $rgba
+	
+	+lt-ie9
+		background-color: transparent
+		-ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr=#{$ie-hex-str},endColorstr=#{$ie-hex-str})"
+		filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#{$ie-hex-str},endColorstr=#{$ie-hex-str})
+		zoom: 1
+
+
+// AFTER 
+
+@mixin aspect($percentage: 100%, $align: middle, $after: after, $wrap: true)
+	
+	@if $wrap == true
+		white-space: nowrap
+		> *
+			white-space: normal
+
+	&:#{$after}
+		content: ''
+		padding: $percentage 0 0 0
+		width: 0
+		max-width: 0
+		font-size: 0
+		line-height: 0
+		overflow: hidden
+		visibility: hidden
+		+inline-block($align)
+		+box-sizing
+		@content
+
+
+
+// HELPER FUNCTIONS
+
+@function svg-url($svg)
+	$encoded:''
+	$slice: 2000
+	$index: 0
+	$loops: ceil(str-length($svg)/$slice)
+	@for $i from 1 through $loops
+		$chunk: str-slice($svg, $index, $index + $slice - 1)
+		$chunk: str-replace($chunk,'"','\'')
+		$chunk: str-replace($chunk,'<','%3C')
+		$chunk: str-replace($chunk,'>','%3E')
+		$chunk: str-replace($chunk,'&','%26')
+		$chunk: str-replace($chunk,'#','%23')   
+		$encoded: #{$encoded}#{$chunk}
+		$index: $index + $slice
+	@return url("data:image/svg+xml;charset=utf8,#{$encoded}")
+            
+//  Helper function to replace characters in a string
+@function str-replace($string, $search, $replace: '')
+	$index: str-index($string, $search)
+	@if $index
+		@return str-slice($string, 1, $index - 1) + $replace + str-replace(str-slice($string, $index + str-length($search)), $search, $replace)
+
+	@return $string
+
