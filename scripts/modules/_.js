@@ -47,18 +47,13 @@ var _ = _ || {};
 
 	// ON READY FUNCTIONS
 	$(function(){
-        _.responsive.init();
 		_.formElements.init();
 		_.formEvents.init();
 		_.formValidation.init();
 		_.navigation.init();
-		_.carousel.init();
-		_.filter.init();
 		_.slidein.init();
 		_.lazy.init();
-		_.lightbox.init();		
 		_.pagination.init();
-		_.cookie.init();
 	});
 
 	// ON LOAD/UNLOAD FUNCTIONS
